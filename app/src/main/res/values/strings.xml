@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Tlece Video</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="video_thumbnail">Video Thumbnail</string>
+    <string name="full_screen_button">full Screen button</string>
+    <string name="full_screen_feature_will_be_coming_soon">"Full Screen feature will be coming soon ! "</string>
+    <string name="something_went_wrong_to_play_the_video">Something went wrong to play the video</string>
+    <string name="video_loading">video Loading...</string>
+    <string name="videos_inserted_successfully">Videos inserted successfully</string>
+    <string name="failed_to_insert_videos">Failed to insert videos: %1$s</string>
+</resources>
