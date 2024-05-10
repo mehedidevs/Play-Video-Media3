@@ -188,7 +188,6 @@ class VideoPlayerFragment : BaseFragment<FragmentVideoPlayerBinding>(),
 
 
     companion object {
-
         const val SEEK_THRESHOLD = 5000L
     }
 
