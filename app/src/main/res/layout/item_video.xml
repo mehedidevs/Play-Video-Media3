@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8dp"
                 android:maxLines="3"
-                android:text="@{video.description}"
+                android:text="@{video.updatedTime}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/center"
                 app:layout_constraintTop_toBottomOf="@id/txt_title" />

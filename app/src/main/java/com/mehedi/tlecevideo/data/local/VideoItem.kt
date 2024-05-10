@@ -1,12 +1,9 @@
 package com.mehedi.tlecevideo.data.local
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "video_table")
-@Parcelize
 data class VideoItem(
     @PrimaryKey()
     var id: Int = 0,
@@ -21,4 +18,4 @@ data class VideoItem(
     var videoUrl: String = "",
     var views: String? = null,
     var updatedTime: String? = null
-) : Parcelable
+)

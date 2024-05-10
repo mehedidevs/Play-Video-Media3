@@ -5,17 +5,15 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.mehedi.tlecevideo.R
-import com.mehedi.tlecevideo.data.DataHelper
 import com.mehedi.tlecevideo.data.local.VideoItem
 import com.mehedi.tlecevideo.data.repository.VideoRepository
 import com.mehedi.tlecevideo.databinding.FragmentHomeBinding
+import com.mehedi.tlecevideo.di.DiProviders
 import com.mehedi.tlecevideo.ui.base.BaseFragment
 import com.mehedi.tlecevideo.ui.viewmodels.VideoViewModel
 import com.mehedi.tlecevideo.ui.viewmodels.VideoViewmodelFactory
-import com.mehedi.tlecevideo.utils.showToast
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClickListener {
 
     override val layoutId: Int
@@ -28,9 +26,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClic
 
 
     private val viewModel by activityViewModels<VideoViewModel> {
-        val repository =
-            VideoRepository(DataHelper.videoDAO(requireContext()), DataHelper.videoService())
-        VideoViewmodelFactory(repository)
+        VideoViewmodelFactory(
+            VideoRepository(
+                DiProviders.videoDAO(requireContext()),
+                DiProviders.videoService()
+            )
+        )
     }
 
 
@@ -38,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClic
         super.onViewCreated(view, savedInstanceState)
 
         initializer()
-        insertVideoObserver()
+
         getAllVideoObserver()
 
     }
@@ -56,24 +57,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClic
 
     }
 
-    private fun insertVideoObserver() {
-
-        viewModel.insertionStatus.observe(viewLifecycleOwner) { result ->
-            result.onSuccess {
-                showToast(getString(R.string.videos_inserted_successfully))
-            }
-            result.onFailure { e ->
-                showToast(getString(R.string.failed_to_insert_videos, e.message))
-            }
-        }
-
-    }
 
     override fun onThumbnailClick(videoItem: VideoItem) {
         viewModel.setCurrentVideo(videoItem)
 
         findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToVideoPlayerFragment()
+            R.id.action_homeFragment_to_videoPlayerFragment
         )
 
     }

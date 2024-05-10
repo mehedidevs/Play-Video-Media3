@@ -2,55 +2,49 @@ package com.mehedi.tlecevideo.di
 
 import android.content.Context
 import androidx.room.Room
-
 import com.mehedi.tlecevideo.data.local.VideoDAO
 import com.mehedi.tlecevideo.data.local.VideoDatabase
 import com.mehedi.tlecevideo.data.remote.VideoApiService
-import com.mehedi.tlecevideo.data.repository.VideoRepository
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-
-import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-object DiProviders {
+class DiProviders {
 
-    @Provides
-    @Singleton
-    fun retrofitProviders(): Retrofit.Builder {
-        return Retrofit.Builder()
-            .baseUrl(DiConstant.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-    }
 
-    @Provides
-    @Singleton
-    fun providesVideoApiService(retrofit: Retrofit.Builder): VideoApiService {
-        return retrofit.build().create(VideoApiService::class.java)
-    }
+    companion object {
 
-    @Provides
-    @Singleton
-    fun providesRoom(@ApplicationContext context: Context): VideoDatabase {
-        return Room.databaseBuilder(context, VideoDatabase::class.java, DiConstant.VIDEO_DB).build()
-    }
+        private var videoApiService: VideoApiService? = null
+        private var videoDao: VideoDAO? = null
 
-    @Provides
-    @Singleton
-    fun providesVideoDao(db: VideoDatabase): VideoDAO {
-        return db.getVideoDao()
-    }
+        @Synchronized
+        fun videoService(): VideoApiService {
+            if (videoApiService == null) {
+                videoApiService = Retrofit.Builder()
+                    .baseUrl(DiConstant.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()).build()
+                    .create(VideoApiService::class.java)
+                return videoApiService as VideoApiService
+            } else {
+                return videoApiService as VideoApiService
+            }
+        }
 
-    @Provides
-    @Singleton
-    fun provideVideoRepository(dao: VideoDAO, service: VideoApiService): VideoRepository {
-        return VideoRepository(dao, service)
+        @Synchronized
+        fun videoDAO(context: Context): VideoDAO {
+
+            if (videoDao == null) {
+                videoDao =
+                    Room.databaseBuilder(context, VideoDatabase::class.java, DiConstant.VIDEO_DB)
+                        .build()
+                        .getVideoDao()
+
+                return videoDao as VideoDAO
+            } else {
+                return videoDao as VideoDAO
+            }
+
+
+        }
     }
 
 

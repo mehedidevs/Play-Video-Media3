@@ -2,9 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("kapt")
-    alias(libs.plugins.hiltAndroid)
-    id("kotlin-parcelize")
-    alias(libs.plugins.safeArgs)
 }
 
 android {
@@ -64,9 +61,7 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
 
-    //dagger hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+
 
 
     //lifecycle viewmodel

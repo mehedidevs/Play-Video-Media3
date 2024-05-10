@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.mehedi.tlecevideo.data.DataHelper
+import com.mehedi.tlecevideo.di.DiProviders
 import com.mehedi.tlecevideo.data.repository.VideoRepository
 
 
@@ -25,7 +25,7 @@ class RefreshDataWorker(
     override suspend fun doWork(): Result {
 
         val repository =
-            VideoRepository(DataHelper.videoDAO(applicationContext), DataHelper.videoService())
+            VideoRepository(DiProviders.videoDAO(applicationContext), DiProviders.videoService())
         return try {
             repository.insertVideos()
             Result.success()

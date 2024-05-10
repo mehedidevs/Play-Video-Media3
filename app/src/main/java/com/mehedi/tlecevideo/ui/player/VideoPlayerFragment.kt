@@ -18,7 +18,7 @@ import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.exoplayer.trackselection.ExoTrackSelection
 import androidx.media3.ui.PlayerView
 import com.mehedi.tlecevideo.R
-import com.mehedi.tlecevideo.data.DataHelper
+import com.mehedi.tlecevideo.di.DiProviders
 import com.mehedi.tlecevideo.data.local.VideoItem
 import com.mehedi.tlecevideo.data.repository.VideoRepository
 import com.mehedi.tlecevideo.databinding.FragmentVideoPlayerBinding
@@ -44,7 +44,7 @@ class VideoPlayerFragment : BaseFragment<FragmentVideoPlayerBinding>(),
 
     private val viewModel by activityViewModels<VideoViewModel> {
         val repository =
-            VideoRepository(DataHelper.videoDAO(requireContext()), DataHelper.videoService())
+            VideoRepository(DiProviders.videoDAO(requireContext()), DiProviders.videoService())
         VideoViewmodelFactory(repository)
     }
 

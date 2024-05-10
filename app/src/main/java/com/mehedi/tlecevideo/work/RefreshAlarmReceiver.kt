@@ -1,47 +1,38 @@
-package com.mehedi.tlecevideo
+package com.mehedi.tlecevideo.work
 
-import android.app.Application
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.mehedi.tlecevideo.work.RecurringAlarm
-import com.mehedi.tlecevideo.work.RefreshDataWorker
-
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
-
-class TelceApp : Application() {
+class RefreshAlarmReceiver : BroadcastReceiver() {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
-    override fun onCreate() {
-        super.onCreate()
-        delayedInit()
-    }
 
+    override fun onReceive(context: Context, intent: Intent) {
 
-    private fun delayedInit() {
         applicationScope.launch {
-            setupOneTimeWork()
-            RecurringAlarm.setRecurringAlarm(this@TelceApp)
+            setupOneTimeWork(context)
         }
+
+
     }
 
-
-    private fun setupOneTimeWork() {
+    private fun setupOneTimeWork(context: Context) {
         val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+            .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
         val oneTimeRequest = OneTimeWorkRequestBuilder<RefreshDataWorker>()
             .setConstraints(constraints)
             .build()
 
-        WorkManager.getInstance(applicationContext).enqueue(oneTimeRequest)
+        WorkManager.getInstance(context).enqueue(oneTimeRequest)
     }
-
-
 }
