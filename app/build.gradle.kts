@@ -39,6 +39,10 @@ android {
     dataBinding {
         enable = true
     }
+
+    viewBinding {
+        enable = true
+    }
 }
 
 dependencies {
@@ -61,8 +65,6 @@ dependencies {
     //coroutines
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
-
-
 
 
     //lifecycle viewmodel
