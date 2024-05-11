@@ -1,7 +1,10 @@
 package com.mehedi.tlecevideo.ui.home
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.mehedi.tlecevideo.R
@@ -12,6 +15,7 @@ import com.mehedi.tlecevideo.di.DiProviders
 import com.mehedi.tlecevideo.ui.base.BaseFragment
 import com.mehedi.tlecevideo.ui.viewmodels.VideoViewModel
 import com.mehedi.tlecevideo.ui.viewmodels.VideoViewmodelFactory
+import com.mehedi.tlecevideo.utils.PermissionUtils
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClickListener {
@@ -37,9 +41,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClic
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        requestPermissions()
         initializer()
-
         getAllVideoObserver()
 
     }
@@ -65,6 +68,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClic
             R.id.action_homeFragment_to_videoPlayerFragment
         )
 
+    }
+
+    private val locationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            when {
+                it.getOrDefault(Manifest.permission.POST_NOTIFICATIONS, false) -> {}
+                it.getOrDefault(Manifest.permission.SCHEDULE_EXACT_ALARM, false) -> {}
+                else -> PermissionUtils.showPermissionSettings(
+                    binding.root,
+                    requireActivity(),
+                    getString(R.string.rationale_notification)
+                )
+            }
+        }
+
+    private fun requestPermissions() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            locationPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.POST_NOTIFICATIONS,
+                    Manifest.permission.SCHEDULE_EXACT_ALARM
+                )
+            )
+        }
     }
 
 

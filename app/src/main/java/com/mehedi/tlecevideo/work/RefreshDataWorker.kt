@@ -4,23 +4,15 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.mehedi.tlecevideo.di.DiProviders
 import com.mehedi.tlecevideo.data.repository.VideoRepository
+import com.mehedi.tlecevideo.di.DiProviders
 
 
 class RefreshDataWorker(
-
-    appContext: Context,
+    private val appContext: Context,
     params: WorkerParameters
 ) :
     CoroutineWorker(appContext, params) {
-
-
-    companion object {
-
-        const val WORK_NAME = "RefreshDataWorker"
-    }
-
 
     override suspend fun doWork(): Result {
 
@@ -28,10 +20,10 @@ class RefreshDataWorker(
             VideoRepository(DiProviders.videoDAO(applicationContext), DiProviders.videoService())
         return try {
             repository.insertVideos()
+            RecurringAlarm.setRecurringAlarm(appContext)
             Result.success()
         } catch (e: Exception) {
             Log.d("TAG", "doWork: ${e.message} ")
-
             Result.retry()
         }
     }

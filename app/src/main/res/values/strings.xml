@@ -6,7 +6,12 @@
     <string name="full_screen_button">full Screen button</string>
     <string name="full_screen_feature_will_be_coming_soon">"Full Screen feature will be coming soon ! "</string>
     <string name="something_went_wrong_to_play_the_video">Something went wrong to play the video</string>
-    <string name="video_loading">video Loading...</string>
+    <string name="video_loading">Video Loading…</string>
     <string name="videos_inserted_successfully">Videos inserted successfully</string>
     <string name="failed_to_insert_videos">Failed to insert videos: %1$s</string>
+    <string name="description_notification">this is the description of Tlece Video app Description</string>
+    <string name="notification_channel_id">test_telceNotificationID</string>
+    <string name="notification_channel_name">telce notifcaton channel</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="rationale_notification">This app needs access to your POST NOTIFICATIONS so you can take pictures.</string>
 </resources>
