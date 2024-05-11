@@ -36,3 +36,10 @@ jobs:
         with:
           name: android-app-release.apk
           path: app/build/outputs/apk/release/app-release.apk
+
+      - name: Push to Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/release/*"
+          tag: v0.0.1
+          token: ${{ secrets.TOKEN }}
