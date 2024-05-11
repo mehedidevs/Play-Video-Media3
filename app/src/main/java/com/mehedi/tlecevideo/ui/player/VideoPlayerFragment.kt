@@ -3,6 +3,7 @@ package com.mehedi.tlecevideo.ui.player
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
@@ -18,10 +19,10 @@ import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.exoplayer.trackselection.ExoTrackSelection
 import androidx.media3.ui.PlayerView
 import com.mehedi.tlecevideo.R
-import com.mehedi.tlecevideo.di.DiProviders
 import com.mehedi.tlecevideo.data.local.VideoItem
 import com.mehedi.tlecevideo.data.repository.VideoRepository
 import com.mehedi.tlecevideo.databinding.FragmentVideoPlayerBinding
+import com.mehedi.tlecevideo.di.DiProviders
 import com.mehedi.tlecevideo.ui.base.BaseFragment
 import com.mehedi.tlecevideo.ui.home.VideoAdapter
 import com.mehedi.tlecevideo.ui.viewmodels.VideoViewModel
@@ -67,7 +68,6 @@ class VideoPlayerFragment : BaseFragment<FragmentVideoPlayerBinding>(),
     private fun initializer() {
 
 
-
         binding.apply {
             playerView = videoPlayerView
             rvVideos.adapter = videoAdapter
@@ -106,6 +106,8 @@ class VideoPlayerFragment : BaseFragment<FragmentVideoPlayerBinding>(),
                 is DataState.Success -> {
                     setupPlayer(status.data?.videoUrl)
                     binding.video = status.data
+
+                    (activity as AppCompatActivity).supportActionBar?.title = status.data?.title
                 }
             }
 
@@ -116,7 +118,6 @@ class VideoPlayerFragment : BaseFragment<FragmentVideoPlayerBinding>(),
 
     private fun setupPlayer(videoUrl: String?) {
         resetPlayer()
-
         videoUrl?.let { video ->
             val httpDataSourceFactory: DataSource.Factory =
                 DefaultHttpDataSource.Factory().setUserAgent(userAgent)
@@ -141,8 +142,6 @@ class VideoPlayerFragment : BaseFragment<FragmentVideoPlayerBinding>(),
             it.stop()
             it.release()
         }
-
-
     }
 
 

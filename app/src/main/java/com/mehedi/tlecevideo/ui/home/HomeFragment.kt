@@ -48,14 +48,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClic
     }
 
     private fun initializer() {
+        loading.show()
         binding.rvVideos.adapter = videoAdapter
     }
 
 
     private fun getAllVideoObserver() {
-
         viewModel.videosLiveData.observe(viewLifecycleOwner) { videoList ->
             videoAdapter.submitList(videoList)
+            loading.dismiss()
         }
 
     }
@@ -63,7 +64,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), VideoAdapter.VideoClic
 
     override fun onThumbnailClick(videoItem: VideoItem) {
         viewModel.setCurrentVideo(videoItem)
-
         findNavController().navigate(
             R.id.action_homeFragment_to_videoPlayerFragment
         )

@@ -16,7 +16,7 @@ class VideoAdapter(val videoClickListener: VideoClickListener) :
     }
 
 
-    inner class VideoViewHolder(val binding: ItemVideoBinding) :
+    inner class VideoViewHolder(private val binding: ItemVideoBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(videoItem: VideoItem) {
