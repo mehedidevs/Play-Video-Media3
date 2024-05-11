@@ -16,20 +16,26 @@ This Android application fetches JSON data from a provided URL, displays it in b
  - [ ] Background data fetching and local database update every 5 minutes
  - [ ] Firebase Cloud Messaging (FCM) for push notifications
 
+
+
 **To run the project locally, follow these steps:**
 
 Clone the repository: git clone  https://github.com/mehedidevs/Tlece-Video.git 
 
-**Step 1 :** Open the project in Android Studio.
-**Step 2 :** Build and run the project on an Android device or emulator.
+**Step 1:** Open the project in Android Studio  </br>
+**Step 2:** Build and run the project on an Android device or emulator </br> </br>
 
-**Dependencies:**
-**Retrofit:** For making HTTP requests and handling API calls.
-**Gson:** For parsing JSON data into Java/Kotlin objects.
-**Room:** For local database storage.
-**Firebase Cloud Messaging:** For push notifications.
-**Kotlin Couroutines:** For  executing the code asynchronously. etc.
-**Glide:** For fast and efficient Image loading 
+
+
+**Dependencies:**  </br>  
+**Retrofit:** For making HTTP requests and handling API calls </br>
+**Gson:** For parsing JSON data into Java/Kotlin objects  </br>
+**Room:** For local database storage  </br>
+**Firebase Cloud Messaging:** For push notifications  </br>
+**Kotlin Coroutines:** For  executing the code asynchronously  </br>
+**Glide:** For fast and efficient Image loading  </br>
+
+
 
 **Contributing:**
 Contributions are welcome! Feel free to open issues or pull requests for any improvements or bug fixes.
