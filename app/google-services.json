@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "414546059851",
+    "firebase_url": "https://videocallapp-1bb92-default-rtdb.firebaseio.com",
+    "project_id": "videocallapp-1bb92",
+    "storage_bucket": "videocallapp-1bb92.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414546059851:android:c9dbdbd9efb7a7203823ce",
+        "android_client_info": {
+          "package_name": "com.mehedi.tlecevideo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414546059851-3ee5ovfnhum0vnnfiolflae5rdk7uahn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT5kY3OkVzPJQe1Qw3ak8ZMWa-OrBjrj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414546059851-3ee5ovfnhum0vnnfiolflae5rdk7uahn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414546059851:android:cff10077af57e9273823ce",
+        "android_client_info": {
+          "package_name": "com.mehedi.videocallapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414546059851-3ee5ovfnhum0vnnfiolflae5rdk7uahn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT5kY3OkVzPJQe1Qw3ak8ZMWa-OrBjrj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414546059851-3ee5ovfnhum0vnnfiolflae5rdk7uahn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
