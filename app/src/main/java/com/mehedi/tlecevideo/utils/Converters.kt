@@ -9,9 +9,7 @@ object Converters {
 
     fun fromTimestamp(value: Long?): String? {
         if (value == null) return null
-
         val date = Date(value)
-
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
